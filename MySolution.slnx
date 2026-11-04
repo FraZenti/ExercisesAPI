@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ShiftLoggerRecap/ShiftLoggerRecap.csproj" />
+  <Project Path="ShiftLoggerUI/ShiftLoggerUI.csproj" />
+</Solution>

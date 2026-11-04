@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj": {}
+    "C:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj": {
+    "C:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj",
+        "projectUniqueName": "C:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj",
         "projectName": "ShiftLoggerUI",
-        "projectPath": "c:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj",
+        "projectPath": "C:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\ShiftLoggerUI.csproj",
         "packagesPath": "C:\\Users\\Emili\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\obj\\",
+        "outputPath": "C:\\Users\\Emili\\OneDrive\\Desktop\\exercises\\ExercisesAPI\\ShiftLoggerUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Emili\\AppData\\Roaming\\NuGet\\NuGet.Config"

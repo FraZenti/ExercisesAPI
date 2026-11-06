@@ -3,6 +3,6 @@ namespace ShiftLoggerRecap;
 public class Worker
 {
     public int Id { get; set; }
-    public String? Name { get; set; }
+    public string? Name { get; set; }
     public List<Shift> Shifts { get; set; } = [];
 }

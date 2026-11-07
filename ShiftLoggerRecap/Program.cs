@@ -13,7 +13,7 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 builder.Services.AddDbContext<ShiftLoggerContext>(options => options.UseSqlServer(connectionString));
 
-//builder.Services.AddScoped<ShiftService>();
+builder.Services.AddScoped<ShiftService>();
 
 var app = builder.Build();
 

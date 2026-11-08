@@ -30,4 +30,26 @@ public class ShiftService
         _context.Workers.Add(worker);
         await _context.SaveChangesAsync();
     }
+
+    public async Task PutWorker(Worker worker)
+    {
+        _context.Entry(worker).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> WorkerExists(int id)
+    {
+        return await _context.Workers.AnyAsync(w => w.Id == id);
+    }
+    public async Task<bool> DeleteWorker(int id)
+    {
+        var worker = await _context.Workers.FindAsync(id);
+        if(worker == null)
+            return false;
+        
+        _context.Workers.Remove(worker);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }

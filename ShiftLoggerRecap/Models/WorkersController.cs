@@ -24,7 +24,7 @@ public class WorkersController : ControllerBase
     public async Task<ActionResult<Worker>> GetWorker(int id)
     {
         var worker = await _service.GetWorker(id);
-        if(worker == null)
+        if (worker == null)
         {
             return NotFound();
         }
@@ -35,6 +35,37 @@ public class WorkersController : ControllerBase
     public async Task<ActionResult<Worker>> PostWorker(Worker worker)
     {
         await _service.PostWorker(worker);
-        return CreatedAtAction(nameof(GetWorker), new {id = worker.Id}, worker);
+        return CreatedAtAction(nameof(GetWorker), new { id = worker.Id }, worker);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutWorker(int id, Worker worker)
+    {
+        if (id != worker.Id)
+        {
+            return BadRequest();
+        }
+
+        bool workerExists = await _service.WorkerExists(worker.Id);
+
+        if (!workerExists)
+        {
+            return BadRequest();
+        }
+
+        await _service.PutWorker(worker);
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteWorker(int id)
+    {
+        bool deleted = await _service.DeleteWorker(id);
+
+        if (!deleted)
+        {
+            return NotFound();
+        }
+        return NoContent();
     }
 }

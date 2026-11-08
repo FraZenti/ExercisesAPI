@@ -19,4 +19,22 @@ public class WorkersController : ControllerBase
         var workers = await _service.WorkersList();
         return workers;
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Worker>> GetWorker(int id)
+    {
+        var worker = await _service.GetWorker(id);
+        if(worker == null)
+        {
+            return NotFound();
+        }
+        return worker;
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Worker>> PostWorker(Worker worker)
+    {
+        await _service.PostWorker(worker);
+        return CreatedAtAction(nameof(GetWorker), new {id = worker.Id}, worker);
+    }
 }

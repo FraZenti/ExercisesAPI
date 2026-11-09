@@ -48,4 +48,46 @@ public class ShiftsController : ControllerBase
         await _service.PostShift(shift);
         return CreatedAtAction(nameof(GetShift), new {id = shift.Id}, shift);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutShift(int id, Shift shift)
+    {
+        if(id != shift.Id)
+        {
+            return BadRequest("ID mismatch.");
+        }
+
+        bool exists = await _service.ShiftExists(id);
+        if(!exists)
+        {
+            return NotFound();
+        }
+
+        bool valid = _service.ValidateShift(shift.StartTime, shift.EndTime);
+
+        if (!valid)
+        {
+            return BadRequest("End time must be after start time.");
+        }
+
+        bool workerExists = await _service.WorkerExists(shift.WorkerId);
+        if(!workerExists)
+        {
+            return BadRequest("Worker does not exist.");
+        }
+
+        await _service.PutShift(shift);
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteShift(int id)
+    {
+        bool deleted = await _service.DeleteShift(id);
+        if(!deleted)
+        {
+            return NotFound();
+        }
+        return NoContent();
+    }
 }

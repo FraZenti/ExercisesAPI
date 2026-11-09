@@ -18,6 +18,14 @@ public class ShiftService
         return workers;
     }
 
+    public async Task<List<Shift>> ShiftsList()
+    {
+        var shifts = await _context.Shifts
+            .ToListAsync();
+
+        return shifts;
+    }
+
     public async Task<Worker?> GetWorker(int id)
     {
         var worker = await _context.Workers
@@ -25,9 +33,22 @@ public class ShiftService
         return worker;
     }
 
+    public async Task<Shift?> GetShift(int id)
+    {
+        var shift = await _context.Shifts
+            .FirstOrDefaultAsync(s => s.Id == id);
+        return shift;
+    }
+
     public async Task PostWorker(Worker worker)
     {
         _context.Workers.Add(worker);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task PostShift(Shift shift)
+    {
+        _context.Shifts.Add(shift);
         await _context.SaveChangesAsync();
     }
 
@@ -40,6 +61,14 @@ public class ShiftService
     public async Task<bool> WorkerExists(int id)
     {
         return await _context.Workers.AnyAsync(w => w.Id == id);
+    }
+
+    public bool ValidateShift(DateTime start, DateTime end)
+    {
+        if(end <= start)    
+            return false;
+        
+        return true;
     }
     public async Task<bool> DeleteWorker(int id)
     {

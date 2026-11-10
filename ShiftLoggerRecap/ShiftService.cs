@@ -14,6 +14,7 @@ public class ShiftService
     public async Task<List<Worker>> WorkersList()
     {
         var workers = await _context.Workers
+            .Include(w => w.Shifts)
             .ToListAsync();
         return workers;
     }
@@ -21,6 +22,7 @@ public class ShiftService
     public async Task<List<Shift>> ShiftsList()
     {
         var shifts = await _context.Shifts
+            //.Include(s => s.Worker)
             .ToListAsync();
 
         return shifts;

@@ -40,6 +40,19 @@ public class ShiftService
         return shift;
     }
 
+    public async Task<List<Shift>?> GetWorkerShifts(int workerId)
+    {
+        if(!await WorkerExists(workerId))
+        {
+            return null;
+        }
+
+        var shifts = await _context.Shifts
+            .Where(s => s.WorkerId == workerId)
+            .ToListAsync();
+        return shifts;
+    }
+
     public async Task PostWorker(Worker worker)
     {
         _context.Workers.Add(worker);

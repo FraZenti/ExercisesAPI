@@ -31,6 +31,17 @@ public class WorkersController : ControllerBase
         return worker;
     }
 
+    [HttpGet("{id}/Shifts")]
+    public async Task<ActionResult<List<Shift>>> GetWorkerShifts(int id)
+    {
+        var shifts = await _service.GetWorkerShifts(id);
+        if(shifts == null)
+        {
+            return NotFound();
+        }
+        return shifts;
+    }
+
     [HttpPost]
     public async Task<ActionResult<Worker>> PostWorker(Worker worker)
     {

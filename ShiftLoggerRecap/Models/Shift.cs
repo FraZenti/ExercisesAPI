@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace ShiftLoggerRecap;
 
 public class Shift
@@ -11,6 +9,5 @@ public class Shift
 
     public int WorkerId { get; set; }
 
-    [JsonIgnore]
     public Worker? Worker { get; set; }
 }

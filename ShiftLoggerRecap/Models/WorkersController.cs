@@ -14,7 +14,7 @@ public class WorkersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Worker>>> GetWorkers()
+    public async Task<ActionResult<List<WorkerDto>>> GetWorkers()
     {
         var workers = await _service.WorkersList();
         return workers;

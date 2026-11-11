@@ -14,7 +14,7 @@ public class ShiftsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Shift>>> GetShifts()
+    public async Task<ActionResult<List<ShiftDto>>> GetShifts()
     {
         var shifts = await _service.ShiftsList();
         return shifts;

@@ -11,16 +11,41 @@ public class ShiftService
         _context = context;
     }
 
-    public async Task<List<Worker>> WorkersList()
+    public async Task<List<WorkerDto>> WorkersList()
     {
         var workers = await _context.Workers
+            .Select(
+                w => new WorkerDto
+                {
+                    Id = w.Id,
+                    Name = w.Name,
+                    Shifts = w.Shifts.Select(
+                        s => new WorkerShiftDto
+                        {
+                            Id = w.Id,
+                            StartTime = s.StartTime,
+                            EndTime = s.EndTime
+                        }
+                    ).ToList()
+                }
+            )
             .ToListAsync();
         return workers;
     }
 
-    public async Task<List<Shift>> ShiftsList()
+    public async Task<List<ShiftDto>> ShiftsList()
     {
         var shifts = await _context.Shifts
+            .Select(
+                s => new ShiftDto
+                {
+                    Id = s.Id,
+                    StartTime = s.StartTime,
+                    EndTime = s.EndTime,
+                    WorkerId = s.WorkerId,
+                    WorkerName = s.Worker!.Name
+                }
+            )
             .ToListAsync();
 
         return shifts;
@@ -42,7 +67,7 @@ public class ShiftService
 
     public async Task<List<Shift>?> GetWorkerShifts(int workerId)
     {
-        if(!await WorkerExists(workerId))
+        if (!await WorkerExists(workerId))
         {
             return null;
         }

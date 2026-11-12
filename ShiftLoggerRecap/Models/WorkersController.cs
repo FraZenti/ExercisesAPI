@@ -21,7 +21,7 @@ public class WorkersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Worker>> GetWorker(int id)
+    public async Task<ActionResult<WorkerDto>> GetWorker(int id)
     {
         var worker = await _service.GetWorker(id);
         if (worker == null)
@@ -32,7 +32,7 @@ public class WorkersController : ControllerBase
     }
 
     [HttpGet("{id}/Shifts")]
-    public async Task<ActionResult<List<Shift>>> GetWorkerShifts(int id)
+    public async Task<ActionResult<List<WorkerShiftDto>>> GetWorkerShifts(int id)
     {
         var shifts = await _service.GetWorkerShifts(id);
         if(shifts == null)

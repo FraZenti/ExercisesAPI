@@ -21,7 +21,7 @@ public class ShiftsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Shift>> GetShift(int id)
+    public async Task<ActionResult<ShiftDto>> GetShift(int id)
     {
         var shift = await _service.GetShift(id);
         if(shift == null)

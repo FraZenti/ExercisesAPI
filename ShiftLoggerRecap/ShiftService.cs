@@ -19,7 +19,8 @@ public class ShiftService
                 {
                     Id = w.Id,
                     Name = w.Name,
-                    Shifts = w.Shifts.Select(
+                    Shifts = w.Shifts
+                    .Select(
                         s => new WorkerShiftDto
                         {
                             Id = w.Id,
@@ -51,21 +52,49 @@ public class ShiftService
         return shifts;
     }
 
-    public async Task<Worker?> GetWorker(int id)
+    public async Task<WorkerDto?> GetWorker(int id)
     {
         var worker = await _context.Workers
-            .FirstOrDefaultAsync(w => w.Id == id);
+            .Where(w => w.Id == id)
+            .Select(
+                w => new WorkerDto
+                {
+                    Id = w.Id,
+                    Name = w.Name,
+                    Shifts = w.Shifts
+                    .Select(
+                        s => new WorkerShiftDto
+                        {
+                            Id = s.Id,
+                            StartTime = s.StartTime,
+                            EndTime = s.EndTime
+                        }
+                    ).ToList()
+                }
+            )
+            .FirstOrDefaultAsync();
         return worker;
     }
 
-    public async Task<Shift?> GetShift(int id)
+    public async Task<ShiftDto?> GetShift(int id)
     {
         var shift = await _context.Shifts
-            .FirstOrDefaultAsync(s => s.Id == id);
+            .Where((s => s.Id == id))
+            .Select(
+                s => new ShiftDto
+                {
+                    Id = s.Id,
+                    StartTime = s.StartTime,
+                    EndTime = s.EndTime,
+                    WorkerId = s.WorkerId,
+                    WorkerName = s.Worker!.Name
+                }
+            )
+            .FirstOrDefaultAsync();
         return shift;
     }
 
-    public async Task<List<Shift>?> GetWorkerShifts(int workerId)
+    public async Task<List<WorkerShiftDto>?> GetWorkerShifts(int workerId)
     {
         if (!await WorkerExists(workerId))
         {
@@ -74,6 +103,14 @@ public class ShiftService
 
         var shifts = await _context.Shifts
             .Where(s => s.WorkerId == workerId)
+            .Select(
+                s => new WorkerShiftDto
+                {
+                    Id = s.Id,
+                    StartTime = s.StartTime,
+                    EndTime = s.EndTime
+                }
+            )
             .ToListAsync();
         return shifts;
     }

@@ -43,8 +43,9 @@ public class WorkersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Worker>> PostWorker(Worker worker)
-    {
+    public async Task<ActionResult<WorkerDto>> PostWorker(WorkerDtoInput input)
+    {   
+        WorkerDto worker = new WorkerDto { Name = input.Name};
         await _service.PostWorker(worker);
         return CreatedAtAction(nameof(GetWorker), new { id = worker.Id }, worker);
     }

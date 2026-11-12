@@ -115,10 +115,14 @@ public class ShiftService
         return shifts;
     }
 
-    public async Task PostWorker(Worker worker)
+    public async Task PostWorker(WorkerDto workerDto)
     {
+        Worker worker = new Worker {
+            Name = workerDto.Name
+        };
         _context.Workers.Add(worker);
         await _context.SaveChangesAsync();
+        workerDto.Id = worker.Id;
     }
 
     public async Task PostShift(Shift shift)
